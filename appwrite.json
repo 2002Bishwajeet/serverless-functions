@@ -1,0 +1,20 @@
+{
+    "projectId": "serverless-functions",
+    "projectName": "Serverless functions",
+    "functions": [
+        {
+            "$id": "ogp-extractor",
+            "name": "OGP Extractor",
+            "runtime": "php-8.0",
+            "path": "functions/OGP Extractor",
+            "entrypoint": "src/index.php",
+            "ignore": [
+                "vendor"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        }
+    ]
+}
