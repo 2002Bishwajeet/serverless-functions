@@ -9,7 +9,6 @@ class OgpTest extends TestCase
 {
     public function testOgp()
     {
-        \var_dump(__DIR__);
         $ogp = Ogp::getData("https://github.com/janhq/jan");
         $this->assertArrayHasKey('title', $ogp);
         $this->assertArrayHasKey('og:description', $ogp);

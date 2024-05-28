@@ -20,7 +20,7 @@ class Ogp
                 throw new \Exception('Could not fetch content from url' . $content);
             }
             return Parser::parse($content);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             throw $th;
         }
     }
