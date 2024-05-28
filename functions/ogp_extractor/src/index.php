@@ -2,38 +2,30 @@
 
 require_once(__DIR__ . '/../vendor/autoload.php');
 
-// use Appwrite\Client;
-// use Appwrite\Exception;
+use OGP\Ogp;
 
-// This is your Appwrite function
-// It's executed each time we get a request
+
 return function ($context) {
-    // Why not try the Appwrite SDK?
-    //
-    // $client = new Client();
-    // $client
-    //     ->setEndpoint('https://cloud.appwrite.io/v1')
-    //     ->setProject(getenv('APPWRITE_FUNCTION_PROJECT_ID'))
-    //      ->setKey(getenv('APPWRITE_API_KEY'));
-
-    // You can log messages to the console
-    $context->log('Hello, Logs!');
-
-    // If something goes wrong, log an error
-    $context->error('Hello, Errors!');
-
-    // The `req` object contains the request data
-    if ($context->req->method === 'GET') {
-        // Send a response with the res object helpers
-        // `res.send()` dispatches a string back to the client
-        return $context->res->send('Hello, World!');
+    // the url must have the query string
+    // if the query isn't present, return with an error
+    if(!isset($context->req->query['url'])){
+        $context->error("No url query parameter");
+        return $context->res->json(["error" => "url query parameter is required"]);
     }
 
-    // `res.json()` is a handy helper for sending JSON
-    return $context->res->json([
-        'motto' => 'Build like a team of hundreds_',
-        'learn' => 'https://appwrite.io/docs',
-        'connect' => 'https://appwrite.io/discord',
-        'getInspired' => 'https://builtwith.appwrite.io',
-    ]);
+    $url = $context->req->query['url'];
+
+
+    // If the request method is GET, return the complete OGP data
+    if ($context->req->method === 'GET') {
+        try {
+        $ogp = Ogp::getData($url);
+        return $context->res->json($ogp);
+
+        } catch (\Exception $e) {
+            $context->error("Could not fetch content from url" . $e->getMessage());
+            return $context->res->json(["error" => "Could not fetch content from url. See Developer Console for more details"]);
+        }
+    }
+    return $context->res->json(["error" => "Invalid request method"]);
 };
