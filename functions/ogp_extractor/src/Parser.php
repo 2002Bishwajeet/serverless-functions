@@ -30,7 +30,7 @@ use DOMDocument;
          */
         public static function parse(string $content) {
 
-            $doc = new \DOMDocument();
+            $doc = new DOMDocument();
 
             // Fudge to handle a situation when an encoding isn't present
             if (strpos($content, 'xml encoding=')===false)
