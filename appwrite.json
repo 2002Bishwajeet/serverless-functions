@@ -16,21 +16,6 @@
       "events": [],
       "schedule": "",
       "timeout": 15
-    },
-    {
-      "$id": "665570186018fc517df0",
-      "name": "My Awesome Function",
-      "runtime": "php-8.0",
-      "execute": ["any"],
-      "events": [],
-      "schedule": "",
-      "timeout": 15,
-      "enabled": true,
-      "logging": true,
-      "entrypoint": "src/index.php",
-      "commands": "composer install",
-      "ignore": ["vendor"],
-      "path": "functions/My Awesome Function"
     }
   ]
 }
