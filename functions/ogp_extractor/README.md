@@ -1,47 +1,100 @@
-# OGP Extractor
+#  🌐 OGP Extractor
 
-Welcome to the documentation of this function 👋 We strongly recommend keeping this file in sync with your function's logic to make sure anyone can easily understand your function in the future. If you don't need documentation, you can remove this file.
+A simple cloud function that extracts Open Graph Protocol [(ogp.me)](https://ogp.me) metadata from a given URL that can be used to generate link previews.
 
-## 🤖 Documentation
+## 🧰  Usage
 
-Simple function similar to typical "hello world" example, but instead, we return a simple JSON that tells everyone how awesome developers are.
+### Base URL
+[```ogpparser.bishwajeetparhi.dev```](https://ogpparser.bishwajeetparhi.dev/)
 
-<!-- Update with your description, for example 'Create Stripe payment and return payment URL' -->
+### GET/
 
-_Example input:_
+**Parameters**
 
-This function expects no input
+| Name | Description                                        | Location | Sample Value                                |
+|------|----------------------------------------------------|----------|---------------------------------------------|
+| url  | Link of the page that you want to extract metadata | Query    | https://www.youtube.com/watch?v=dQw4w9WgXcQ |
 
-<!-- If input is expected, add example -->
 
-_Example output:_
+_Sample request:_
 
-<!-- Update with your expected output -->
+```curl
+curl --request GET \
+  --url 'https://ogpparser.bishwajeetparhi.dev/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ'
+```
+
+### Example output:
+
+#### Sample `200` Response
+
 
 ```json
 {
- "areDevelopersAwesome": true
+  "og": {
+    "og:site_name": "YouTube",
+    "og:url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "og:title": "Rick Astley - Never Gonna Give You Up (Official Music Video)",
+    "og:image": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "og:image:width": "1280",
+    "og:image:height": "720",
+    "og:description": "The official video for “Never Gonna Give You Up” by Rick Astley. The new album 'Are We There Yet?' is out now: Download here: https://RickAstley.lnk.to/AreWe...",
+    "og:type": "video.other",
+    "og:video:url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "og:video:secure_url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "og:video:type": "text/html",
+    "og:video:width": "1280",
+    "og:video:height": "720",
+    "og:video:tag": "never gonna give you up karaoke"
+  },
+  "twitter": {
+    "twitter:card": "player",
+    "twitter:site": "@youtube",
+    "twitter:url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "twitter:title": "Rick Astley - Never Gonna Give You Up (Official Music Video)",
+    "twitter:description": "The official video for “Never Gonna Give You Up” by Rick Astley. The new album 'Are We There Yet?' is out now: Download here: https://RickAstley.lnk.to/AreWe...",
+    "twitter:image": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "twitter:app:name:iphone": "YouTube",
+    "twitter:app:id:iphone": "544007664",
+    "twitter:app:name:ipad": "YouTube",
+    "twitter:app:id:ipad": "544007664",
+    "twitter:app:url:iphone": "vnd.youtube://www.youtube.com/watch?v=dQw4w9WgXcQ&feature=applinks",
+    "twitter:app:url:ipad": "vnd.youtube://www.youtube.com/watch?v=dQw4w9WgXcQ&feature=applinks",
+    "twitter:app:name:googleplay": "YouTube",
+    "twitter:app:id:googleplay": "com.google.android.youtube",
+    "twitter:app:url:googleplay": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "twitter:player": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "twitter:player:width": "1280",
+    "twitter:player:height": "720"
+  },
+  "oembed": {
+    "jsonp": [
+      "https://www.youtube.com/oembed?format=json&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ"
+    ],
+    "xml": [
+      "https://www.youtube.com/oembed?format=xml&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ"
+    ]
+  },
+  "title": "Rick Astley - Never Gonna Give You Up (Official Music Video) - YouTube",
+  "description": "The official video for “Never Gonna Give You Up” by Rick Astley. The new album 'Are We There Yet?' is out now: Download here: https://RickAstley.lnk.to/AreWe...",
+  "keywords": "rick astley, Never Gonna Give You Up, nggyu, never gonna give you up lyrics, rick rolled, Rick Roll, rick astley official, rickrolled, Fortnite song, Fortnite event, Fortnite dance, fortnite never gonna give you up, rick roll, rickrolling, rick rolling, never gonna give you up, 80s music, rick astley new, animated video, rickroll, meme songs, never gonna give u up lyrics, Rick Astley 2022, never gonna let you down, animated, rick rolls 2022, never gonna give you up karaoke"
 }
 ```
 
-## 📝 Environment Variables
+#### Sample '400' Response
 
-List of environment variables used by this cloud function:
+```json
+{
+ "error": "url query parameter is required"
+}
+```
 
-- **APPWRITE_FUNCTION_ENDPOINT** - Endpoint of Appwrite project
-- **APPWRITE_FUNCTION_API_KEY** - Appwrite API Key
-<!-- Add your custom environment variables -->
+## ⚙️ Configuration
 
-## 🚀 Deployment
+| Setting           | Value              |
+| ----------------- | ------------------ |
+| Runtime           | PHP (8.0)          |
+| Entrypoint        | `src/index.php`    |
+| Build Commands    | `composer install` |
+| Permissions       | `any`              |
+| Timeout (Seconds) | 15                 |
 
-There are two ways of deploying the Appwrite function, both having the same results, but each using a different process. We highly recommend using CLI deployment to achieve the best experience.
-
-### Using CLI
-
-Make sure you have [Appwrite CLI](https://appwrite.io/docs/command-line#installation) installed, and you have successfully logged into your Appwrite server. To make sure Appwrite CLI is ready, you can use the command `appwrite client --debug` and it should respond with green text `✓ Success`.
-
-Make sure you are in the same folder as your `appwrite.json` file and run `appwrite deploy function` to deploy your function. You will be prompted to select which functions you want to deploy.
-
-### Manual using tar.gz
-
-Manual deployment has no requirements and uses Appwrite Console to deploy the tag. First, enter the folder of your function. Then, create a tarball of the whole folder and gzip it. After creating `.tar.gz` file, visit Appwrite Console, click on the `Deploy Tag` button and switch to the `Manual` tab. There, set the `entrypoint` to `src/index.php`, and upload the file we just generated.
