@@ -80,7 +80,7 @@ curl --request GET \
 }
 ```
 
-#### Sample '400' Response
+#### Sample `400` Response
 
 ```json
 {
