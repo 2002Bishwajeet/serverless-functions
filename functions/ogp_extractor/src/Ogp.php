@@ -13,12 +13,20 @@ class Ogp
              $headers = [
                  "Content-Type" => "text/html",
              ];
-             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-             curl_setopt($ch, CURLOPT_HTTPGET, true);
+            curl_setopt_array($ch, [
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 15,
+                CURLOPT_CUSTOMREQUEST => "GET",
+            ]);
              $content = curl_exec($ch);
-            if (!$content) {
-                throw new \Exception('Could not fetch content from url' . $content);
+             $error =  curl_error($ch);
+             curl_close($ch);
+            if ($error) {
+              throw new \Exception('Could not fetch content from url' . $error);
             }
             return Parser::parse($content);
         } catch (\Throwable $th) {
