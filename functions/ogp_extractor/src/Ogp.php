@@ -12,7 +12,7 @@ class Ogp
              $ch = curl_init($url);
              $headers = [
                  "Content-Type" => "text/html",
-                 "User-Agent" => "Chrome/114.0.5735.134"
+                 "User-Agent" => "googlebot"
              ];
             curl_setopt_array($ch, [
                 CURLOPT_FOLLOWLOCATION => true,
@@ -20,6 +20,8 @@ class Ogp
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
+                CURLOPT_USERAGENT => "googlebot",
+                CURLOPT_HTTPHEADER => $headers,
                 CURLOPT_TIMEOUT => 15,
                 CURLOPT_CUSTOMREQUEST => "GET",
             ]);

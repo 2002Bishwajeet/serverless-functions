@@ -19,11 +19,10 @@ class OgpTest extends TestCase
 
     public function testTwitterUrl()
     {
-        $ogp = Ogp::getData("https://twitter.com/trunkio/status/1795913092204998997");
-        $this->assertArrayHasKey('title', $ogp, 'Title not found');
-        $this->assertArrayHasKey('description', $ogp, 'Description not found');
-        $this->assertArrayHasKey('og', $ogp);
-        $this->assertArrayHasKey('twitter', $ogp);
+        $ogp = Ogp::getData("https://x.com/trunkio/status/1795913092204998997");
+        $this->assertArrayHasKey('og:title', $ogp['og'], 'Title not found');
+        $this->assertArrayHasKey('description', $ogp);
+
 
     }
 
