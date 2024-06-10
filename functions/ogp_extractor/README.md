@@ -5,7 +5,7 @@ A simple cloud function that extracts Open Graph Protocol [(ogp.me)](https://ogp
 ## 🧰  Usage
 
 ### Base URL
-[```ogpparser.bishwajeetparhi.dev```](https://ogpparser.bishwajeetparhi.dev/)
+[```ogp.cloudx.run```](https://ogp.cloudx.run/)
 
 ### GET/
 
@@ -20,7 +20,7 @@ _Sample request:_
 
 ```curl
 curl --request GET \
-  --url 'https://ogpparser.bishwajeetparhi.dev/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ'
+  --url 'https://ogp.cloudx.run/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ'
 ```
 
 ### Example output:
