@@ -81,3 +81,4 @@ def main(context):
             if "error" in converted_image:
                 context.error(converted_image["message"])
                 return context.res.json(converted_image, 500)
+            return context.res.json(converted_image, 200)
