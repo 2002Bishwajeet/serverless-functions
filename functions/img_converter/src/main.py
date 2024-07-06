@@ -47,8 +47,8 @@ def main(context):
         # Send a response with the res object helpers
         # `ctx.res.send()` dispatches a string back to the client
         # Load webpage
-        with open("index.html", "r") as f:
-            return context.res.send(f.read())
+        html_file = open("/index.html", "r").read()
+        return context.res.send(html_file)
 
     if context.req.method == "POST":
 
