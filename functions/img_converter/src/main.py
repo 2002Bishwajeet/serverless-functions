@@ -1,5 +1,4 @@
 from io import BytesIO
-import json
 from PIL import Image
 from pillow_heif import register_heif_opener
 import base64
@@ -47,8 +46,9 @@ def main(context):
     if context.req.method == "GET":
         # Send a response with the res object helpers
         # `ctx.res.send()` dispatches a string back to the client
-        # TODO: Render Html
-        return context.res.send("Hello, World!")
+        # Load webpage
+        with open("../views/index.html", "r") as f:
+            return context.res.send(f.read())
 
     if context.req.method == "POST":
 
