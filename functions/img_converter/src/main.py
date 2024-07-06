@@ -1,15 +1,13 @@
-from appwrite.client import Client
+import json
 import os
 from PIL import Image
 from pillow_heif import register_heif_opener
 
-# register_heif_opener()
+register_heif_opener()
 
 # def image_convertor(image_bytes: bytes, image_format: str):
 
 # return
-# This is your Appwrite function
-# It's executed each time we get a request
 
 
 def main(context):
@@ -36,7 +34,9 @@ def main(context):
 
     if context.req.method == "POST":
         # Get the request body
-        context.log(context.req.headers)
+        # Currently Blocked https://github.com/open-runtimes/open-runtimes/pull/263
+        # Workaround to receive a base64 encoded image. Set the limit to max 5MB for now
+        context.log(json.dumps(context.req.body))
 
         # `ctx.res.json()` is a handy helper for sending JSON
     return context.res.json(
