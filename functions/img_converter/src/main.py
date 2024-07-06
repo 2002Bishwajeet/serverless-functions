@@ -36,7 +36,7 @@ def main(context):
         # Get the request body
         # Currently Blocked https://github.com/open-runtimes/open-runtimes/pull/263
         # Workaround to receive a base64 encoded image. Set the limit to max 5MB for now
-        context.log(json.dumps(context.req.body))
+        context.log("Recieved image data")
 
         # `ctx.res.json()` is a handy helper for sending JSON
     return context.res.json(
