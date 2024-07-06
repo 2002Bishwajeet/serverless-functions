@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Convertor</title>
+    <link rel="stylesheet" href="../public/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/franken-ui-releases@0.0.13/dist/slate.min.css"
+    />
+    <script>
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (
+        localStorage.getItem("color-theme") === "dark" ||
+        (!("color-theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+  </head>
+  <body class="bg-background text-foreground">
+    <div
+      class="uk-position-top-right uk-margin-small-top uk-margin-small-right"
+    >
+      <button class="cursor-pointer uk-button" id="theme-toggle">
+        <svg
+          id="theme-toggle-light-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-sun dark:hidden"
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.41 1.41"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
+        <svg
+          id="theme-toggle-dark-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-moon hidden dark:block"
+        >
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="uk-container uk-container-small uk-margin-large-top">
+      <h1 class="uk-heading-small uk-text-center uk-foreground-default">
+        Image Converter
+      </h1>
+      <div class="uk-margin-top uk-flex uk-flex-center">
+        <div class="uk-card uk-card-default uk-card-body uk-width-1-2">
+          <form id="form" class="uk-form-stacked">
+            <div class="uk-margin">
+              <label class="uk-form-label" for="image">Image</label>
+              <div class="uk-form-controls">
+                <input
+                  class="uk-input"
+                  id="image"
+                  type="file"
+                  accept="image/*"
+                  required
+                />
+              </div>
+            </div>
+            <div class="uk-margin">
+              <label class="uk-form-label" for="format">Format</label>
+              <div class="uk-form-controls">
+                <select class="uk-select" id="format" required>
+                  <option value="jpeg">JPEG</option>
+                  <option value="png">PNG</option>
+                  <option value="webp">WEBP</option>
+                  <option value="tiff">TIFF</option>
+                  <option value="heif">HEIF</option>
+                </select>
+              </div>
+            </div>
+            <div class="uk-margin">
+              <label class="uk-form-label" for="quality">Quality</label>
+              <div class="uk-form-controls">
+                <input
+                  class="uk-range"
+                  id="quality"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="100"
+                />
+              </div>
+            </div>
+            <div class="uk-margin">
+              <label class="uk-form-label" for="output">Output</label>
+              <div class="uk-form-controls">
+                <input
+                  class="uk-input"
+                  id="output"
+                  type="text"
+                  placeholder="output"
+                  required
+                />
+              </div>
+            </div>
+            <div class="uk-margin">
+              <button class="uk-button uk-button-primary" type="submit">
+                Convert
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer class="uk-text-center uk-margin-large-top uk-position-bottom">
+      <p class="uk-text-medium">
+        Made with
+        <span class="uk-icon">♥️</span>
+        by
+        <a
+          class="uk-text-italic uk-button-text"
+          href="https://bishwajeetparhi.dev"
+          target="_blank"
+          >Bishwajeet Parhi</a
+        >
+      </p>
+      <p class="uk-text-medium">
+        Runs on Appwrite Cloud function and static page designed using
+        <a
+          class="uk-text-italic uk-button-text"
+          href="https://www.franken-ui.dev/"
+          target="_blank"
+          >franken-ui</a
+        >
+      </p>
+    </footer>
+  </body>
+  <script src="script.js"></script>
+</html>
