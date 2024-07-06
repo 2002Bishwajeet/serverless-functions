@@ -1,4 +1,5 @@
 from io import BytesIO
+import os
 from PIL import Image
 from pillow_heif import register_heif_opener
 import base64
@@ -47,6 +48,8 @@ def main(context):
         # Send a response with the res object helpers
         # `ctx.res.send()` dispatches a string back to the client
         # Load webpage
+        context.log(os.listdir())
+        context.log(os.getcwd())
         html_file = open("src/index.html", "r").read()
         return context.res.send(html_file)
 
