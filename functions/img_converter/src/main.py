@@ -50,7 +50,9 @@ def main(context):
         # Load webpage
         context.log(os.listdir("src/function/src"))
         html_file = open("src/function/src/index.html", "r").read()
-        return context.res.send(html_file)
+        return context.res.send(html_file, 200, {
+            "content-type": "text/html"
+        })
 
     if context.req.method == "POST":
 
