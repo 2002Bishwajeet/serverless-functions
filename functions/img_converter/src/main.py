@@ -9,16 +9,16 @@ register_heif_opener()
 supported_types = ["jpeg", "jgp", "png", "webp", "bmp", "heif"]
 
 
-def image_convertor(image_encoded: str, image_format: str, isHeif: bool = False):
+def image_convertor(image_encoded: str, image_format: str, isHeif: bool = False, quality: int = 95):
     # Decode the base64 image
     image_data = base64.b64decode(image_encoded)
     image = Image.open(BytesIO(image_data))
     tmp_name = "temp." + image_format
     try:
         if isHeif:
-            image.save(tmp_name, format=image_format, quality=95)
+            image.save(tmp_name, quality, format=image_format)
         else:
-            image.save(tmp_name, format=image_format)
+            image.save(tmp_name, quality, format=image_format)
         encoded_image = base64.b64encode(open(tmp_name, "rb").read())
         return {
             "image": encoded_image.decode("utf-8"),
@@ -56,6 +56,7 @@ def main(context):
         # Workaround to receive a base64 encoded image. Set the limit to max 5MB for now
         encoded_image: str | None = context.req.body["file"]
         convert_to: str = context.req.body["convert"] if "convert" in context.req.body else "jpeg"
+        quality: int = context.req.body["quality"]
 
         if encoded_image is None:
             return context.res.json({
@@ -77,7 +78,7 @@ def main(context):
 
             # Convert the image
             converted_image = image_convertor(
-                image_data, convert_to, isHeif=img_format == "heif")
+                image_data, convert_to, quality, isHeif=img_format == "heif")
             if "error" in converted_image:
                 context.error(converted_image["message"])
                 return context.res.json(converted_image, 500)
