@@ -36,7 +36,7 @@ def main(context):
 
     if context.req.method == "POST":
         # Get the request body
-        context.log(context.req.body_raw)
+        context.log(context.req.headers)
 
         # `ctx.res.json()` is a handy helper for sending JSON
     return context.res.json(
