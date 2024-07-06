@@ -16,6 +16,21 @@
       "events": [],
       "schedule": "",
       "timeout": 15
+    },
+    {
+      "$id": "img_converter",
+      "name": "img_converter",
+      "runtime": "python-3.9",
+      "execute": [],
+      "events": [],
+      "schedule": "",
+      "timeout": 15,
+      "enabled": true,
+      "logging": true,
+      "entrypoint": "src/main.py",
+      "commands": "pip install -r requirements.txt",
+      "ignore": ["__pypackages__,.venv"],
+      "path": "functions/Image Converter"
     }
   ]
 }
