@@ -51,7 +51,7 @@ def main(context):
         # `ctx.res.send()` dispatches a string back to the client
         # Load webpage
         path = context.req.path
-        context.log(os.listdir("src/function/src"))
+        # REFER: https://github.com/dishwasher-detergent/screenshot/blob/main/functions/screenshot/src/pages/home.ts
         if path == "/":
             html_file = open(f"{static_path}/index.html", "r").read()
             return context.res.send(html_file, 200, {

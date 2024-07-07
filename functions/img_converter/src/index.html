@@ -25,19 +25,19 @@
     <div
       class="uk-position-top-right uk-margin-small-top uk-margin-small-right"
     >
-      <button class="cursor-pointer uk-button" id="theme-toggle">
+      <a class="cursor-pointer uk-button uk-button-ghost" id="theme-toggle">
         <svg
           id="theme-toggle-light-icon"
           xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
+          width="24"
+          height="24"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="lucide lucide-sun dark:hidden"
+          class="lucide lucide-sun"
         >
           <circle cx="12" cy="12" r="4"></circle>
           <path d="M12 2v2"></path>
@@ -52,19 +52,19 @@
         <svg
           id="theme-toggle-dark-icon"
           xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
+          width="24"
+          height="24"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="lucide lucide-moon hidden dark:block"
+          class="lucide lucide-moon"
         >
           <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
         </svg>
-      </button>
+      </a>
     </div>
     <div class="uk-container uk-container-small uk-margin-large-top">
       <h1 class="uk-heading-small uk-text-center uk-foreground-default">
@@ -113,13 +113,11 @@
             <div class="uk-margin">
               <label class="uk-form-label" for="output">Output</label>
               <div class="uk-form-controls">
-                <input
-                  class="uk-input"
-                  id="output"
-                  type="text"
-                  placeholder="output"
-                  required
-                />
+                <div class="uk-card-media" id="output">
+                  <p class="uk-text-muted uk-text-small">
+                    Output will be displayed here
+                  </p>
+                </div>
               </div>
             </div>
             <div class="uk-margin">
