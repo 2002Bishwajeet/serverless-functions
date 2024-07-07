@@ -6,6 +6,8 @@ import base64
 
 register_heif_opener()
 
+static_path = "src/function/src"
+
 supported_types = ["jpeg", "jgp", "png", "webp", "bmp", "heif"]
 
 
@@ -48,11 +50,25 @@ def main(context):
         # Send a response with the res object helpers
         # `ctx.res.send()` dispatches a string back to the client
         # Load webpage
+        path = context.req.path
         context.log(os.listdir("src/function/src"))
-        html_file = open("src/function/src/index.html", "r").read()
-        return context.res.send(html_file, 200, {
-            "content-type": "text/html"
-        })
+        if path == "/":
+            html_file = open(f"{static_path}/index.html", "r").read()
+            return context.res.send(html_file, 200, {
+                "content-type": "text/html"
+            })
+        elif path == "/style.css":
+            css_file = open(f"{static_path}/style.css", "r").read()
+            return context.res.send(css_file, 200, {
+                "content-type": "text/css"
+            })
+        elif path == "/script.js":
+            js_file = open(f"{static_path}/script.js", "r").read()
+            return context.res.send(js_file, 200, {
+                "content-type": "text/javascript"
+            })
+        else:
+            return context.res.send("Not Found", 404)
 
     if context.req.method == "POST":
 
