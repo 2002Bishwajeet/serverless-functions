@@ -57,8 +57,8 @@ def main(context):
             return context.res.send(html_file, 200, {
                 "content-type": "text/html"
             })
-        elif path == "/style.css":
-            css_file = open(f"{static_path}/style.css", "r").read()
+        elif path == "/styles.css":
+            css_file = open(f"{static_path}/styles.css", "r").read()
             return context.res.send(css_file, 200, {
                 "content-type": "text/css"
             })
