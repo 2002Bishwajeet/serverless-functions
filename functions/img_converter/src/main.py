@@ -8,7 +8,7 @@ register_heif_opener()
 
 static_path = "src/function/src"
 
-supported_types = ["jpeg", "jgp", "png", "webp", "bmp", "heif"]
+supported_types = ["jpeg", "jgp", "png", "webp", "bmp", "heif", "ico"]
 
 
 def image_convertor(image_encoded: str, image_format: str = "jpeg", isHeif: bool = False, quality: int = 95):
