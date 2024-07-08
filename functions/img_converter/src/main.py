@@ -77,7 +77,7 @@ def main(context):
                 "error": "Missing Body Data"
             }, 422)
         encoded_image: str | None = context.req.body["file"]
-        convert_to: str = context.req.body["convert"]
+        convert_to: str = context.req.body["format"]
         quality: int = int(context.req.body["quality"])
         context.log(f"quality: {quality}")
 

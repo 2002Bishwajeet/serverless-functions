@@ -111,7 +111,7 @@ const toBase64 = (file) =>
 async function convertImage(image, format, quality) {
   const data = {
     file: image,
-    convert: format,
+    format: format,
     quality: quality,
   };
   // Testing Purposes
