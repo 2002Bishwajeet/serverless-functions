@@ -14,7 +14,11 @@ supported_types = ["jpeg", "jgp", "png", "webp", "bmp", "heif"]
 def image_convertor(image_encoded: str, image_format: str = "jpeg", isHeif: bool = False, quality: int = 95):
     # Decode the base64 image
     image_data = base64.b64decode(image_encoded)
+
     image = Image.open(BytesIO(image_data))
+
+    if image.mode == "RGBA":
+        image = image.convert("RGB")
     tmp_name = "temp." + image_format
     try:
         if isHeif:
