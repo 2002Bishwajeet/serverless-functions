@@ -127,7 +127,8 @@ async function convertImage(image, format, quality) {
     method: "POST",
   });
   if (response.ok) {
-    return await response.json()["image"];
+    const res = await response.json();
+    return res.image;
   } else {
     // check if the status code is 400, 500 or 404 in the response.status
     const error = await response.json();
