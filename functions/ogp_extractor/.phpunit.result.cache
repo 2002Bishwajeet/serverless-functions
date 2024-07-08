@@ -1,1 +1,1 @@
-{"version":1,"defects":{"OGP\\Tests\\OgpTest::testOgp":4,"OGP\\Unit\\OgpTest::testOgp":4,"User\\Function\\OgpTest::testOgp":4,"OGP\\OgpTest::testOgp":4,"OGP\\Tests\\Unit\\OgpTest::testOgp":3},"times":{"OGP\\Tests\\OgpTest::testOgp":5.624,"OGP\\Unit\\OgpTest::testOgp":0.003,"User\\Function\\OgpTest::testOgp":0.001,"OGP\\OgpTest::testOgp":0.002,"OGP\\Tests\\Unit\\OgpTest::testOgp":1.037}}
+{"version":1,"defects":{"OGP\\Tests\\Unit\\OgpTest::testTwitterUrl":3},"times":{"OGP\\Tests\\Unit\\OgpTest::testTwitterUrl":2.266}}

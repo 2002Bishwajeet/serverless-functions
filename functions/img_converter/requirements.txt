@@ -1,0 +1,3 @@
+appwrite
+pillow
+pillow-heif
