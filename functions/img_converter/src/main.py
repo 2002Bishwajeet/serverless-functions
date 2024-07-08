@@ -65,6 +65,11 @@ def main(context):
             return context.res.send(js_file, 200, {
                 "content-type": "text/javascript"
             })
+        elif path == "/image.svg":
+            svg_file = open(f"{static_path}/image.svg", "r").read()
+            return context.res.send(svg_file, 200, {
+                "content-type": "image/svg+xml"
+            })
         else:
             return context.res.send("Not Found", 404)
 
