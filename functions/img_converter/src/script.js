@@ -76,14 +76,14 @@ form.addEventListener("submit", async function (e) {
       console.error(err);
       document.getElementById("alert").hidden = false;
       const errorTitle = document.getElementById("error-title");
-      errorTitle.innerHTML = `${err.error}`;
+      errorTitle.innerHTML = `${err.message}`;
       if ("cause" in err) {
         document.getElementById("error").innerHTML = `${err.cause}`;
       }
       return;
     });
 
-    if (convertImage) {
+    if (convertedImage) {
       const img = document.createElement("img");
       img.src = convertedImage;
       console.log(img.src);
@@ -125,9 +125,6 @@ async function convertImage(image, format, quality) {
       "Content-Type": "application/json",
     },
     method: "POST",
-  }).catch((error) => {
-    console.error(error);
-    return;
   });
   if (response.ok) {
     return await response.json()["image"];
