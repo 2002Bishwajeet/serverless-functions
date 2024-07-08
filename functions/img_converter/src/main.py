@@ -68,6 +68,11 @@ def main(context):
 
         # Currently Blocked to not receive bytedata https://github.com/open-runtimes/open-runtimes/pull/263
         # Workaround to receive a base64 encoded image. Set the limit to max 5MB for now
+        context.log(context.req.body)
+        if (not context.req.body):
+            return context.res.json({
+                "error": "Missing Body Data"
+            }, 422)
         encoded_image: str | None = context.req.body["file"]
         convert_to: str = context.req.body["convert"] if "convert" in context.req.body else "jpeg"
         quality: int = context.req.body["quality"]

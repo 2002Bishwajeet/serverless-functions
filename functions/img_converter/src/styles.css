@@ -18,18 +18,3 @@ h1 {
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
 }
-
-.loader {
-  width: 32px;
-  height: 32px;
-  animation: spin 1.2s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}

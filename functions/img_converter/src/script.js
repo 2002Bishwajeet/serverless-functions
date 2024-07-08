@@ -63,6 +63,7 @@ form.addEventListener("submit", async function (e) {
   document.getElementById("convert").hidden = true;
   document.getElementById("loader").hidden = false;
   document.getElementById("download").hidden = true;
+  document.getElementById("alert").hidden = true;
 
   if (file) {
     // Get the base64 data
@@ -72,13 +73,11 @@ form.addEventListener("submit", async function (e) {
     if (convertedImage instanceof Error) {
       // Render Error message
       console.error(convertedImage);
-      const messageBlock = document.getElementById("message-block");
-      messageBlock.innerHTML = `${convertedImage.message}`;
-      messageBlock.classList.replace("uk-text-muted", "uk-text-danger");
-      messageBlock.classList.replace("uk-text-small", "uk-text-medium");
+      document.getElementById("alert").hidden = false;
+      const errorTitle = document.getElementById("error-title");
+      errorTitle.innerHTML = `${convertedImage.message}`;
       if ("cause" in convertedImage) {
         document.getElementById("error").innerHTML = `${convertedImage.cause}`;
-        document.getElementById("error").hidden = false;
       }
     } else {
       const img = document.createElement("img");
@@ -128,12 +127,10 @@ async function convertImage(image, format, quality) {
   } else {
     // check if the status code is 400, 500 or 404 in the response.status
     const error = await response.json();
-    if (response.status === 400 || response.status === 404) {
-      return new Error(error.error);
-    }
     if (response.status === 500) {
-      return new Error("Internal Server Error", { cause: error.message });
+      return new Error(error.error, { cause: error.message });
     }
+    return new Error(error.error);
   }
 }
 
