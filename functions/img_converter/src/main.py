@@ -78,7 +78,7 @@ def main(context):
             }, 422)
         encoded_image: str | None = context.req.body["file"]
         convert_to: str = context.req.body["convert"]
-        quality: int = context.req.body["quality"]
+        quality: int = int(context.req.body["quality"])
         context.log(f"quality: {quality}")
 
         if encoded_image is None:
