@@ -11,7 +11,7 @@ static_path = "src/function/src"
 supported_types = ["jpeg", "jgp", "png", "webp", "bmp", "heif"]
 
 
-def image_convertor(image_encoded: str, image_format: str, isHeif: bool = False, quality: int = 95):
+def image_convertor(image_encoded: str, image_format: str = "jpeg", isHeif: bool = False, quality: int = 95):
     # Decode the base64 image
     image_data = base64.b64decode(image_encoded)
     image = Image.open(BytesIO(image_data))
@@ -73,7 +73,7 @@ def main(context):
                 "error": "Missing Body Data"
             }, 422)
         encoded_image: str | None = context.req.body["file"]
-        convert_to: str = context.req.body["convert"] if "convert" in context.req.body else "jpeg"
+        convert_to: str = context.req.body["convert"]
         quality: int = context.req.body["quality"]
 
         if encoded_image is None:
@@ -96,7 +96,7 @@ def main(context):
 
             # Convert the image
             converted_image = image_convertor(
-                image_data, convert_to, quality=quality, isHeif=bool(img_format == "heif"))
+                image_encoded=image_data, image_format=convert_to, quality=quality, isHeif=bool(img_format == "heif"))
             if "error" in converted_image:
                 context.error(converted_image["message"])
                 return context.res.json(converted_image, 500)
