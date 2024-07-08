@@ -142,7 +142,8 @@ async function convertImage(image, format, quality) {
 function saveImage() {
   const img = document.getElementById("output").querySelector("img");
   const a = document.createElement("a");
+  const format = img.src.split(";")[0].split("/")[1];
   a.href = img.src;
-  a.download = "image.jpg";
+  a.download = `image.${format}`;
   a.click();
 }
