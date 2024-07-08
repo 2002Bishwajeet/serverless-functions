@@ -27,7 +27,7 @@ def image_convertor(image_encoded: str, image_format: str, isHeif: bool = False,
         }
     except Exception as e:
         return {
-            "error": "Error converting the image",
+            "error": "Something went wrong",
             "message": str(e)
         }
 
@@ -42,13 +42,7 @@ def main(context):
     #     .set_key(os.environ["APPWRITE_API_KEY"])
     # )
 
-    # context.log("Hello, Logs!")
-    # context.error("Hello, Errors!")
-
-    # The `ctx.req` object contains the request data
     if context.req.method == "GET":
-        # Send a response with the res object helpers
-        # `ctx.res.send()` dispatches a string back to the client
         # Load webpage
         path = context.req.path
         # REFER: https://github.com/dishwasher-detergent/screenshot/blob/main/functions/screenshot/src/pages/home.ts
