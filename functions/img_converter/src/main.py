@@ -18,9 +18,9 @@ def image_convertor(image_encoded: str, image_format: str = "jpeg", isHeif: bool
     tmp_name = "temp." + image_format
     try:
         if isHeif:
-            image.save(tmp_name, quality, format=image_format)
+            image.save(tmp_name, image_format, quality)
         else:
-            image.save(tmp_name, quality, format=image_format)
+            image.save(tmp_name, image_format, quality)
         encoded_image = base64.b64encode(open(tmp_name, "rb").read())
         return {
             "image": encoded_image.decode("utf-8"),
