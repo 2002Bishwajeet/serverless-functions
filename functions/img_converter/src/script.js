@@ -68,18 +68,22 @@ form.addEventListener("submit", async function (e) {
   if (file) {
     // Get the base64 data
     const encodedImage = await toBase64(file);
-    const convertedImage = await convertImage(encodedImage, format, quality);
-
-    if (convertedImage instanceof Error) {
-      // Render Error message
-      console.error(convertedImage);
+    const convertedImage = await convertImage(
+      encodedImage,
+      format,
+      quality
+    ).catch((err) => {
+      console.error(err);
       document.getElementById("alert").hidden = false;
       const errorTitle = document.getElementById("error-title");
-      errorTitle.innerHTML = `${convertedImage.message}`;
-      if ("cause" in convertedImage) {
-        document.getElementById("error").innerHTML = `${convertedImage.cause}`;
+      errorTitle.innerHTML = `${err.error}`;
+      if ("cause" in err) {
+        document.getElementById("error").innerHTML = `${err.cause}`;
       }
-    } else {
+      return;
+    });
+
+    if (convertImage) {
       const img = document.createElement("img");
       img.src = convertedImage;
       console.log(img.src);
@@ -113,7 +117,7 @@ async function convertImage(image, format, quality) {
   // Testing Purposes
   // const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   // await delay(4000);
-  // return new Error("Internal Server Error", { cause: "Server is down" });
+  // throw new Error("Internal Server Error", { cause: "Server is down" });
   const response = await fetch("/", {
     mode: "same-origin",
     body: JSON.stringify(data),
@@ -128,9 +132,9 @@ async function convertImage(image, format, quality) {
     // check if the status code is 400, 500 or 404 in the response.status
     const error = await response.json();
     if (response.status === 500) {
-      return new Error(error.error, { cause: error.message });
+      throw new Error(error.error, { cause: error.message });
     }
-    return new Error(error.error);
+    throw new Error(error.error);
   }
 }
 
