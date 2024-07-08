@@ -125,6 +125,9 @@ async function convertImage(image, format, quality) {
       "Content-Type": "application/json",
     },
     method: "POST",
+  }).catch((error) => {
+    console.error(error);
+    return;
   });
   if (response.ok) {
     return await response.json()["image"];

@@ -96,7 +96,7 @@ def main(context):
 
             # Convert the image
             converted_image = image_convertor(
-                image_data, convert_to, quality, isHeif=img_format == "heif")
+                image_data, convert_to, quality, isHeif=bool(img_format == "heif"))
             if "error" in converted_image:
                 context.error(converted_image["message"])
                 return context.res.json(converted_image, 500)
