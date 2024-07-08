@@ -8,7 +8,7 @@ register_heif_opener()
 
 static_path = "src/function/src"
 
-supported_types = ["jpeg", "jgp", "png", "webp", "bmp", "heif", "ico"]
+supported_types = ["jpeg", "jgp", "png", "webp", "bmp", "heif", "ico", "svg"]
 
 
 def image_convertor(image_encoded: str, image_format: str = "jpeg", isHeif: bool = False, quality: int = 95):
@@ -76,10 +76,11 @@ def main(context):
             return context.res.json({
                 "error": "Missing Body Data"
             }, 422)
+
         encoded_image: str | None = context.req.body["file"]
         convert_to: str = context.req.body["format"]
         quality: int = int(context.req.body["quality"])
-        context.log(f"quality: {quality}")
+        context.log(f"quality: {quality} convert_to: {convert_to}")
 
         if encoded_image is None:
             return context.res.json({
@@ -94,7 +95,7 @@ def main(context):
                 return context.res.json({
                     "error": "Image is already in the requested format"
                 }, 400)
-            if img_format not in supported_types:
+            if convert_to not in supported_types:
                 return context.res.json({
                     "error": "Image format not supported"
                 }, 400)
