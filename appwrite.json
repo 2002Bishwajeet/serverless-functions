@@ -29,7 +29,7 @@
       "logging": true,
       "entrypoint": "src/main.py",
       "commands": "pip install -r requirements.txt",
-      "ignore": ["__pypackages__,.venv"],
+      "ignore": ["__pypackages__,.venv,tests"],
       "path": "functions/Image Converter"
     }
   ]

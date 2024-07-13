@@ -6,36 +6,37 @@ import base64
 
 register_heif_opener()
 
-static_path = "src/function/src"
+static_path: str = "src/function/src"
 
-supported_types = ["jpeg", "jgp", "png", "webp", "bmp", "heif", "ico", "svg"]
+supported_types = ["jpeg", "jpg", "png", "webp", "bmp", "heif", "ico",]
 
 
-def image_convertor(image_encoded: str, image_format: str = "jpeg", isHeif: bool = False, quality: int = 95):
+def image_convertor(image_encoded: str, image_format: str = "jpeg", quality: int = 95):
     # Decode the base64 image
-    image_data = base64.b64decode(image_encoded)
+    image_data = base64.b64decode(image_encoded.encode("utf-8"))
+    image_format = 'JPEG' if image_format.lower() == "jpg" else image_format
 
-    image = Image.open(BytesIO(image_data))
-
-    if image.mode == "RGBA":
-        image = image.convert("RGB")
-    tmp_name = "temp." + image_format
     try:
-        if isHeif:
-            image.save(tmp_name, image_format, quality=quality)
-        else:
-            image.save(tmp_name, image_format, quality=quality)
-        encoded_image = base64.b64encode(open(tmp_name, "rb").read())
-        return {
-            "image": encoded_image.decode("utf-8"),
-        }
+        image = Image.open(BytesIO(image_data))
+
+        if image.mode == "RGBA":
+            image = image.convert("RGB")
+        tmp_name = "temp." + image_format
+        image.save(tmp_name, image_format, quality=quality)
+        with open(tmp_name, "rb") as f:
+            encoded_image = base64.b64encode(f.read())
+            if os.path.exists(tmp_name):
+                os.remove(tmp_name)
+            return {
+                "image": encoded_image.decode("utf-8"),
+            }
     except Exception as e:
+        if os.path.exists(tmp_name):
+            os.remove(tmp_name)
         return {
             "error": "Something went wrong",
             "message": str(e)
         }
-
-    return
 
 
 def main(context):
@@ -107,8 +108,10 @@ def main(context):
 
             # Convert the image
             converted_image = image_convertor(
-                image_encoded=image_data, image_format=convert_to, quality=quality, isHeif=bool(img_format == "heif"))
-            if "error" in converted_image:
+                image_encoded=image_data, image_format=convert_to, quality=quality)
+
+            if converted_image is not None and "error" in converted_image:
                 context.error(converted_image["message"])
                 return context.res.json(converted_image, 500)
+
             return context.res.json(converted_image, 200)
