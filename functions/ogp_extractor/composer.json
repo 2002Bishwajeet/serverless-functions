@@ -1,33 +1,36 @@
 {
-    "name": "user/function",
-    "description": "",
-    "type": "library",
-    "license": "ISC",
-    "authors": [
-        {
-            "name": "Bishwajeet Parhi",
-            "email": "bishwajeet.techmaster@gmail.com",
-            "homepage": "https://bishwajeetparhi.dev",
-            "role": "Developer"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "OGP\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "OGP\\Tests\\Unit\\": "tests/"
-        }
-    },
-    "require": {
-        "php": ">=8.0.0",
-        "appwrite/appwrite": "8.0.*",
-        "ext-dom": "*",
-         "ext-curl": "*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.3"
+  "name": "user/function",
+  "description": "",
+  "type": "library",
+  "license": "ISC",
+  "scripts": {
+    "test": "./vendor/bin/phpunit tests"
+  },
+  "authors": [
+    {
+      "name": "Bishwajeet Parhi",
+      "email": "bishwajeet.techmaster@gmail.com",
+      "homepage": "https://bishwajeetparhi.dev",
+      "role": "Developer"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "OGP\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "OGP\\Tests\\Unit\\": "tests/"
+    }
+  },
+  "require": {
+    "php": ">=8.0.0",
+    "appwrite/appwrite": "8.0.*",
+    "ext-dom": "*",
+    "ext-curl": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.3"
+  }
 }
