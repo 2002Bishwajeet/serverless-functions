@@ -14,12 +14,12 @@ supported_types = ["jpeg", "jpg", "png", "webp", "bmp", "heif", "ico",]
 def image_convertor(image_encoded: str, image_format: str = "jpeg", quality: int = 95):
     # Decode the base64 image
     image_data = base64.b64decode(image_encoded.encode("utf-8"))
-    image_format = 'JPEG' if image_format.lower() == "jpg" else image_format
+    image_format = 'jpeg' if image_format.lower() == "jpg" else image_format
 
     try:
         image = Image.open(BytesIO(image_data))
 
-        if image.mode == "RGBA":
+        if image_format in ["jpeg", "jpg"] and image.mode == "RGBA":
             image = image.convert("RGB")
         tmp_name = "temp." + image_format
         image.save(tmp_name, image_format, quality=quality)
