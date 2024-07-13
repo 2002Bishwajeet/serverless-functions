@@ -21,9 +21,15 @@ class TestImageConvertor(unittest.TestCase):
     def test_jpeg_images(self):
         # Convert the jpg images to different types
         jpg_image = self.images["jpg"]
+        jpeg_image = self.images["jpeg"]
         # filter jpg and jpeg from supported types and use other formats to convert the image
         for image_format in filter(lambda x: x not in ["jpeg", "jpg"], supported_types):
             result = image_convertor(jpg_image, image_format=image_format)
+            if result is not None:
+                self.assertIn("image", result)
+                self.assertNotIn("error", result)
+        for image_format in filter(lambda x: x not in ["jpeg", "jpg"], supported_types):
+            result = image_convertor(jpeg_image, image_format=image_format)
             if result is not None:
                 self.assertIn("image", result)
                 self.assertNotIn("error", result)

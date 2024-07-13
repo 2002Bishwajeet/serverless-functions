@@ -19,7 +19,7 @@ def image_convertor(image_encoded: str, image_format: str = "jpeg", quality: int
     try:
         image = Image.open(BytesIO(image_data))
 
-        if image_format in ["jpeg", "jpg"] and image.mode != "RGBA":
+        if image_format in ["jpeg", "jpg"] and image.mode != "RGB":
             image = image.convert("RGB")
         tmp_name = "temp." + image_format
         image.save(tmp_name, image_format, quality=quality)
