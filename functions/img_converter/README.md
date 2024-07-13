@@ -26,7 +26,7 @@ HTML Form for interacting with the function
 > [!IMPORTANT]
 >
 > - The `file` parameter should be a base64 encoded image.
-> - The `format` parameter should be one of the following: `jpeg`, `png`, `webp`, `tiff`, `ico`,.
+> - The `format` parameter should be one of the following: `jpeg`, `png`, `webp`, `tiff`, `ico`, `bmp`, `heif`
 > - The `quality` parameter should be an integer between 0 and 95.
 
 _Sample request:_
