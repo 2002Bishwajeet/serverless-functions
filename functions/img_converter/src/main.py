@@ -6,7 +6,7 @@ import base64
 
 register_heif_opener()
 
-static_path: str = "src/functions/src"
+static_path: str = "functions/src"
 
 supported_types = ["jpeg", "jpg", "png", "webp", "bmp", "heif", "ico",]
 
