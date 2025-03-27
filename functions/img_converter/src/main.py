@@ -6,7 +6,7 @@ import base64
 
 register_heif_opener()
 
-static_path: str = "functions/src"
+static_path: str = "function/src"
 
 supported_types = ["jpeg", "jpg", "png", "webp", "bmp", "heif", "ico",]
 
@@ -59,22 +59,22 @@ def main(context):
         path = context.req.path
         # REFER: https://github.com/dishwasher-detergent/screenshot/blob/main/functions/screenshot/src/pages/home.ts
         if path == "/":
-            html_file = open("/index.html", "r").read()
+            html_file = open(f"{static_path}/index.html", "r").read()
             return context.res.send(html_file, 200, {
                 "content-type": "text/html"
             })
         elif path == "/styles.css":
-            css_file = open(f"/styles.css", "r").read()
+            css_file = open(f"{static_path}/styles.css", "r").read()
             return context.res.send(css_file, 200, {
                 "content-type": "text/css"
             })
         elif path == "/script.js":
-            js_file = open(f"/script.js", "r").read()
+            js_file = open(f"{static_path}/script.js", "r").read()
             return context.res.send(js_file, 200, {
                 "content-type": "text/javascript"
             })
         elif path == "/image.svg":
-            svg_file = open(f"/image.svg", "r").read()
+            svg_file = open(f"{static_path}/image.svg", "r").read()
             return context.res.send(svg_file, 200, {
                 "content-type": "image/svg+xml"
             })
