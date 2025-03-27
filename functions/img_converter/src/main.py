@@ -46,6 +46,8 @@ def main(context):
     #     .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
     #     .set_key(os.environ["APPWRITE_API_KEY"])
     # )
+    static_path = os.path.dirname(os.path.abspath(__file__))
+    context.log(f"Static Path: {static_path}")
 
     if context.req.method == "GET":
         # Load webpage
