@@ -1,36 +1,66 @@
 {
-  "projectId": "serverless-functions",
-  "projectName": "Serverless functions",
-  "functions": [
-    {
-      "$id": "ogp-extractor",
-      "name": "OGP Extractor",
-      "runtime": "php-8.0",
-      "path": "functions/ogp_extractor",
-      "entrypoint": "src/index.php",
-      "ignore": ["vendor", ".idea", "tests"],
-      "enabled": true,
-      "logging": true,
-      "commands": "composer install",
-      "execute": ["any"],
-      "events": [],
-      "schedule": "",
-      "timeout": 15
-    },
-    {
-      "$id": "img_converter",
-      "name": "img_converter",
-      "runtime": "python-3.9",
-      "execute": ["any"],
-      "events": [],
-      "schedule": "",
-      "timeout": 15,
-      "enabled": true,
-      "logging": true,
-      "entrypoint": "src/main.py",
-      "commands": "pip install -r requirements.txt",
-      "ignore": ["__pypackages__,.venv,tests"],
-      "path": "functions/Image Converter"
-    }
-  ]
+    "projectId": "serverless-functions",
+    "projectName": "Serverless functions",
+    "functions": [
+        {
+            "$id": "ogp-extractor",
+            "name": "OGP Extractor",
+            "runtime": "php-8.0",
+            "path": "functions/ogp_extractor",
+            "entrypoint": "src/index.php",
+            "ignore": [
+                "vendor",
+                ".idea",
+                "tests"
+            ],
+            "enabled": true,
+            "logging": true,
+            "commands": "composer install",
+            "execute": [
+                "any"
+            ],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        },
+        {
+            "$id": "img_converter",
+            "name": "img_converter",
+            "runtime": "python-3.9",
+            "execute": [
+                "any"
+            ],
+            "events": [],
+            "schedule": "",
+            "timeout": 15,
+            "enabled": true,
+            "logging": true,
+            "entrypoint": "src/main.py",
+            "commands": "pip install -r requirements.txt",
+            "ignore": [
+                "__pypackages__,.venv,tests"
+            ],
+            "path": "functions/Image Converter"
+        },
+        {
+            "$id": "meme-gen",
+            "name": "meme-generator",
+            "runtime": "bun-1.1",
+            "specification": "s-1vcpu-512mb",
+            "execute": [
+                "any"
+            ],
+            "events": [],
+            "scopes": [
+                "users.read"
+            ],
+            "schedule": "",
+            "timeout": 15,
+            "enabled": true,
+            "logging": true,
+            "entrypoint": "src/main.ts",
+            "commands": "bun install",
+            "path": "functions/meme-generator"
+        }
+    ]
 }
