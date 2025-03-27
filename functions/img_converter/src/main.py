@@ -46,30 +46,28 @@ def main(context):
     #     .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
     #     .set_key(os.environ["APPWRITE_API_KEY"])
     # )
-    static_path = os.path.dirname(os.path.abspath(__file__))
-    context.log(f"Static Path: {static_path}")
 
     if context.req.method == "GET":
         # Load webpage
         path = context.req.path
         # REFER: https://github.com/dishwasher-detergent/screenshot/blob/main/functions/screenshot/src/pages/home.ts
         if path == "/":
-            html_file = open("index.html", "r").read()
+            html_file = open("/index.html", "r").read()
             return context.res.send(html_file, 200, {
                 "content-type": "text/html"
             })
         elif path == "/styles.css":
-            css_file = open(f"styles.css", "r").read()
+            css_file = open(f"/styles.css", "r").read()
             return context.res.send(css_file, 200, {
                 "content-type": "text/css"
             })
         elif path == "/script.js":
-            js_file = open(f"script.js", "r").read()
+            js_file = open(f"/script.js", "r").read()
             return context.res.send(js_file, 200, {
                 "content-type": "text/javascript"
             })
         elif path == "/image.svg":
-            svg_file = open(f"{static_path}/image.svg", "r").read()
+            svg_file = open(f"/image.svg", "r").read()
             return context.res.send(svg_file, 200, {
                 "content-type": "image/svg+xml"
             })
