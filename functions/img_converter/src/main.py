@@ -47,6 +47,13 @@ def main(context):
     #     .set_key(os.environ["APPWRITE_API_KEY"])
     # )
 
+    # List directory contents for debugging
+    try:
+        directory_contents = os.listdir('.')
+        context.log(f"Directory contents: {directory_contents}")
+    except Exception as e:
+        context.error(f"Error listing directory: {str(e)}")
+
     if context.req.method == "GET":
         # Load webpage
         path = context.req.path
