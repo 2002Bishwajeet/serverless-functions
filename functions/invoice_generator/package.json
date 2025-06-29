@@ -1,0 +1,18 @@
+{
+  "name": "invoice-generator",
+  "version": "1.0.0",
+  "description": "Professional invoice generator for consulting services",
+  "main": "src/main.ts",
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "node-appwrite": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.16",
+    "@types/node": "^20.19.2",
+    "prettier": "^3.0.0"
+  }
+}

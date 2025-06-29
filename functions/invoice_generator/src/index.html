@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>
+      Invoice Generator - Create Professional Invoices for Consulting
+    </title>
+    <meta
+      name="title"
+      content="Invoice Generator - Create Professional Invoices for Consulting"
+    />
+    <meta
+      name="description"
+      content="Free online invoice generator for consultants and freelancers. Create professional invoices with custom services, tax calculations, and PDF download. Built by Bishwajeet Parhi."
+    />
+    <meta
+      name="keywords"
+      content="invoice generator, freelance invoice, consulting invoice, PDF invoice, professional invoice, free invoice tool"
+    />
+    <meta name="author" content="Bishwajeet Parhi" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://invoicer.cloudx.run" />
+    <meta
+      property="og:title"
+      content="Invoice Generator - Create Professional Invoices for Consulting"
+    />
+    <meta
+      property="og:description"
+      content="Free online invoice generator for consultants and freelancers. Create professional invoices with custom services, tax calculations, and PDF download."
+    />
+    <meta property="og:image" content="./ogp_image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Professional invoice generator interface"
+    />
+    <meta
+      property="og:site_name"
+      content="Invoice Generator by Bishwajeet Parhi"
+    />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://invoicer.cloudx.run" />
+    <meta
+      property="twitter:title"
+      content="Invoice Generator - Create Professional Invoices"
+    />
+    <meta
+      property="twitter:description"
+      content="Free online invoice generator for consultants and freelancers. Create professional invoices with PDF download."
+    />
+    <meta property="twitter:image" content="./ogp_image.png" />
+    <meta
+      property="twitter:image:alt"
+      content="Professional invoice generator interface"
+    />
+    <meta property="twitter:creator" content="@biswa_20p" />
+    <meta property="twitter:site" content="@biswa_20p" />
+
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#667eea" />
+    <meta name="msapplication-TileColor" content="#667eea" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Invoice Generator" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="./favicon.png" />
+    <link rel="apple-touch-icon" href="./favicon.png" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://invoicer.cloudx.run" />
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Invoice Generator",
+        "description": "Free online invoice generator for consultants and freelancers. Create professional invoices with custom services, tax calculations, and PDF download.",
+        "url": "https://invoicer.cloudx.run",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "5000",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Bishwajeet Parhi",
+          "url": "https://bishwajeetparhi.dev"
+        },
+        "creator": {
+          "@type": "Person",
+          "name": "Bishwajeet Parhi",
+          "url": "https://bishwajeetparhi.dev"
+        }
+      }
+    </script>
+
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>Invoice Generator</h1>
+        <p>Create professional invoices for your consulting services</p>
+      </header>
+
+      <div class="form-section">
+        <form id="invoiceForm" autocomplete="on" novalidate>
+          <fieldset class="form-group">
+            <legend>Your Information</legend>
+            <div class="row">
+              <div class="col">
+                <label for="yourName">Full Name *</label>
+                <input
+                  type="text"
+                  id="yourName"
+                  name="yourName"
+                  autocomplete="name"
+                  placeholder="Enter your full name"
+                  required
+                  aria-describedby="yourName-help"
+                />
+                <small id="yourName-help" class="form-help"
+                  >This will appear on your invoice</small
+                >
+              </div>
+              <div class="col">
+                <label for="yourEmail">Email *</label>
+                <input
+                  type="email"
+                  id="yourEmail"
+                  name="yourEmail"
+                  autocomplete="email"
+                  placeholder="your@email.com"
+                  required
+                  aria-describedby="yourEmail-help"
+                />
+                <small id="yourEmail-help" class="form-help"
+                  >Your contact email address</small
+                >
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="yourPhone">Phone</label>
+                <input
+                  type="tel"
+                  id="yourPhone"
+                  name="yourPhone"
+                  autocomplete="tel"
+                  placeholder="+1 (555) 123-4567"
+                />
+              </div>
+              <div class="col">
+                <label for="yourWebsite">Website (optional)</label>
+                <input
+                  type="url"
+                  id="yourWebsite"
+                  name="yourWebsite"
+                  autocomplete="url"
+                  placeholder="https://yourwebsite.com"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="taxId">Tax ID (optional)</label>
+                <input
+                  type="text"
+                  id="taxId"
+                  name="taxId"
+                  autocomplete="off"
+                  placeholder="e.g., EIN, SSN, or VAT number"
+                />
+              </div>
+              <div class="col">
+                <!-- Empty column for layout balance -->
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-full">
+                <label for="yourAddress">Address</label>
+                <textarea
+                  id="yourAddress"
+                  name="yourAddress"
+                  autocomplete="street-address"
+                  rows="3"
+                  placeholder="Street address, city, state, ZIP code"
+                ></textarea>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <legend>Client Information</legend>
+            <div class="row">
+              <div class="col">
+                <label for="clientName">Client Name *</label>
+                <input
+                  type="text"
+                  id="clientName"
+                  name="clientName"
+                  autocomplete="organization"
+                  placeholder="Client company or person name"
+                  required
+                  aria-describedby="clientName-help"
+                />
+                <small id="clientName-help" class="form-help"
+                  >Who you're billing</small
+                >
+              </div>
+              <div class="col">
+                <label for="clientEmail">Client Email</label>
+                <input
+                  type="email"
+                  id="clientEmail"
+                  name="clientEmail"
+                  autocomplete="off"
+                  placeholder="client@company.com"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-full">
+                <label for="clientAddress">Client Address</label>
+                <textarea
+                  id="clientAddress"
+                  name="clientAddress"
+                  autocomplete="off"
+                  rows="3"
+                  placeholder="Client's billing address"
+                ></textarea>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <legend>Invoice Details</legend>
+            <div class="row">
+              <div class="col">
+                <label for="invoiceNumber">Invoice Number *</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    id="invoiceNumber"
+                    name="invoiceNumber"
+                    autocomplete="off"
+                    placeholder="INV-001"
+                    required
+                  />
+                  <button
+                    type="button"
+                    id="generateInvoiceNumber"
+                    class="btn-icon"
+                    title="Generate invoice number"
+                  >
+                    🎲
+                  </button>
+                </div>
+              </div>
+              <div class="col">
+                <label for="invoiceDate">Invoice Date *</label>
+                <input
+                  type="date"
+                  id="invoiceDate"
+                  name="invoiceDate"
+                  autocomplete="off"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="dueDate">Due Date *</label>
+                <div class="input-group">
+                  <input
+                    type="date"
+                    id="dueDate"
+                    name="dueDate"
+                    autocomplete="off"
+                    required
+                  />
+                  <button
+                    type="button"
+                    id="setDueDatePlus30"
+                    class="btn-icon"
+                    title="Set due date to 30 days from invoice date"
+                  >
+                    +30
+                  </button>
+                </div>
+              </div>
+              <div class="col">
+                <label for="currency">Currency</label>
+                <select
+                  id="currency"
+                  name="currency"
+                  autocomplete="transaction-currency"
+                >
+                  <option value="USD">USD ($)</option>
+                  <option value="EUR">EUR (€)</option>
+                  <option value="GBP">GBP (£)</option>
+                  <option value="CAD">CAD ($)</option>
+                  <option value="AUD">AUD ($)</option>
+                  <option value="INR">INR (₹)</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <legend>Services</legend>
+            <div id="servicesContainer">
+              <div class="service-item">
+                <div class="row">
+                  <div class="col-3">
+                    <label>Description *</label>
+                    <input
+                      type="text"
+                      class="service-description"
+                      name="service-description-1"
+                      autocomplete="off"
+                      placeholder="Consulting services"
+                      required
+                      list="service-suggestions"
+                    />
+                    <datalist id="service-suggestions">
+                      <option value="Software Development"></option>
+                      <option value="Web Design"></option>
+                      <option value="Consulting Services"></option>
+                      <option value="Project Management"></option>
+                      <option value="Technical Writing"></option>
+                      <option value="System Administration"></option>
+                      <option value="Database Design"></option>
+                      <option value="UI/UX Design"></option>
+                    </datalist>
+                  </div>
+                  <div class="col-1">
+                    <label>Quantity *</label>
+                    <input
+                      type="number"
+                      class="service-quantity"
+                      name="service-quantity-1"
+                      autocomplete="off"
+                      value="1"
+                      min="0"
+                      step="0.1"
+                      placeholder="1"
+                      required
+                    />
+                  </div>
+                  <div class="col-1">
+                    <label>Rate *</label>
+                    <input
+                      type="number"
+                      class="service-rate"
+                      name="service-rate-1"
+                      autocomplete="off"
+                      min="0"
+                      step="0.01"
+                      placeholder="100.00"
+                      required
+                    />
+                  </div>
+                  <div class="col-1">
+                    <label>Amount</label>
+                    <input
+                      type="number"
+                      class="service-amount"
+                      name="service-amount-1"
+                      autocomplete="off"
+                      readonly
+                      tabindex="-1"
+                    />
+                  </div>
+                  <div class="col-remove">
+                    <button
+                      type="button"
+                      class="remove-service"
+                      style="display: none"
+                      aria-label="Remove this service"
+                    >
+                      ❌
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="button" id="addService" class="btn-secondary">
+              ➕ Add Service
+            </button>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <legend>Additional Information</legend>
+            <div class="row">
+              <div class="col">
+                <label for="taxRate">Tax Rate (%)</label>
+                <input
+                  type="number"
+                  id="taxRate"
+                  name="taxRate"
+                  autocomplete="off"
+                  value="0"
+                  min="0"
+                  max="100"
+                  step="0.01"
+                  placeholder="8.25"
+                />
+              </div>
+              <div class="col">
+                <label for="discount">Discount Amount</label>
+                <input
+                  type="number"
+                  id="discount"
+                  name="discount"
+                  autocomplete="off"
+                  value="0"
+                  min="0"
+                  step="0.01"
+                  placeholder="0.00"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-full">
+                <label for="notes">Notes (optional)</label>
+                <textarea
+                  id="notes"
+                  name="notes"
+                  autocomplete="off"
+                  rows="3"
+                  placeholder="Payment terms, additional notes, special instructions..."
+                ></textarea>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="button-group">
+            <button type="button" id="saveForm" class="btn-secondary">
+              💾 Save Form Data
+            </button>
+            <button type="button" id="loadForm" class="btn-secondary">
+              📂 Load Saved Data
+            </button>
+            <button type="button" id="previewInvoice" class="btn-primary">
+              👁️ Preview Invoice
+            </button>
+            <button type="button" id="downloadPDF" class="btn-primary">
+              📄 Download PDF
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Invoice Preview (Hidden by default) -->
+      <div id="invoicePreview" class="invoice-preview" style="display: none">
+        <div class="invoice-container">
+          <div class="invoice-header">
+            <div class="invoice-title">
+              <h1>INVOICE</h1>
+              <p class="invoice-number">
+                Invoice #<span id="previewInvoiceNumber"></span>
+              </p>
+            </div>
+            <div class="consultant-info">
+              <h3 id="previewYourName"></h3>
+              <p id="previewYourEmail"></p>
+              <p id="previewYourPhone"></p>
+              <p id="previewYourWebsite"></p>
+              <p id="previewTaxId"></p>
+              <div id="previewYourAddress"></div>
+            </div>
+          </div>
+
+          <div class="invoice-details">
+            <div class="bill-to">
+              <h4>Bill To:</h4>
+              <h3 id="previewClientName"></h3>
+              <p id="previewClientEmail"></p>
+              <div id="previewClientAddress"></div>
+            </div>
+            <div class="invoice-meta">
+              <div class="meta-item">
+                <span class="label">Invoice Date:</span>
+                <span id="previewInvoiceDate"></span>
+              </div>
+              <div class="meta-item">
+                <span class="label">Due Date:</span>
+                <span id="previewDueDate"></span>
+              </div>
+            </div>
+          </div>
+
+          <table class="services-table">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Rate</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody id="previewServices"></tbody>
+          </table>
+
+          <div class="invoice-totals">
+            <div class="totals-row">
+              <span>Subtotal:</span>
+              <span class="currency-symbol"></span
+              ><span id="previewSubtotal">0.00</span>
+            </div>
+            <div class="totals-row" id="discountRow" style="display: none">
+              <span>Discount:</span>
+              <span class="currency-symbol"></span
+              ><span id="previewDiscount">0.00</span>
+            </div>
+            <div class="totals-row" id="taxRow" style="display: none">
+              <span>Tax (<span id="previewTaxRate">0</span>%):</span>
+              <span class="currency-symbol"></span
+              ><span id="previewTaxAmount">0.00</span>
+            </div>
+            <div class="totals-row total">
+              <span>Total:</span>
+              <span class="currency-symbol"></span
+              ><span id="previewTotal">0.00</span>
+            </div>
+            <div class="total-in-words">
+              <span class="words-label">Amount in words:</span>
+              <span id="totalInWords">Zero dollars only</span>
+            </div>
+          </div>
+
+          <div
+            class="invoice-notes"
+            id="previewNotesSection"
+            style="display: none"
+          >
+            <h4>Notes:</h4>
+            <p id="previewNotes"></p>
+          </div>
+        </div>
+
+        <div class="preview-actions">
+          <button type="button" id="editInvoice" class="btn-secondary">
+            Edit Invoice
+          </button>
+          <button type="button" id="downloadPreviewPDF" class="btn-primary">
+            Download PDF
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-copyright">
+          <p>&copy; 2025 by Bishwajeet Parhi. All rights reserved.</p>
+        </div>
+        <div class="footer-links">
+          <a
+            href="https://github.com/2002Bishwajeet/serverless-functions"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-link"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
+              />
+            </svg>
+            GitHub
+          </a>
+          <a
+            href="https://bishwajeetparhi.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-link"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+              />
+            </svg>
+            Website
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

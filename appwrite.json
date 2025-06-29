@@ -31,6 +31,22 @@
       "commands": "pip install -r requirements.txt",
       "ignore": ["__pypackages__,.venv,tests"],
       "path": "functions/Image Converter"
+    },
+    {
+      "$id": "invoice_generator",
+      "name": "Invoice Generator",
+      "runtime": "bun-1.1",
+      "specification": "s-1vcpu-512mb",
+      "execute": ["any"],
+      "events": [],
+      "scopes": ["users.read"],
+      "schedule": "",
+      "timeout": 15,
+      "enabled": true,
+      "logging": true,
+      "entrypoint": "src/main.ts",
+      "commands": "bun install",
+      "path": "functions/invoice_generator"
     }
   ]
 }
