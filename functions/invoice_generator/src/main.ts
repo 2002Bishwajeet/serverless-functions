@@ -76,7 +76,7 @@ function serveFile(filename: string, contentType: string, res: any) {
 
 function serveImageFile(filename: string, contentType: string, res: any) {
   try {
-    const currentDir = new URL('.', import.meta.url).pathname;
+    const currentDir = 'function/src/'
     const filePath = currentDir + filename;
     const content = fs.readFileSync(filePath);
 
