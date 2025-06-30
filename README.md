@@ -6,10 +6,11 @@ Collection of Cloud Functions that I built for my use cases. I open sourced the 
 
 ## Functions
 
-| Function Name   | Description                                                                         | API Reference                      |
-| :-------------- | :---------------------------------------------------------------------------------- | :--------------------------------- |
-| OGP Extractor   | Extracts Ogp metadata from the given link that can be used to generate link preview | [Visit](/functions/ogp_extractor/) |
-| Image Converter | Converts the given image to the requested format and quality                        | [Visit](/functions/img_converter/) |
+| Function Name     | Description                                                                                  | API Reference                          |
+| :---------------- | :------------------------------------------------------------------------------------------- | :------------------------------------- |
+| OGP Extractor     | Extracts Ogp metadata from the given link that can be used to generate link preview          | [Visit](/functions/ogp_extractor/)     |
+| Image Converter   | Converts the given image to the requested format and quality                                 | [Visit](/functions/img_converter/)     |
+| Invoice Generator | Professional invoice generator with multi-currency support, tax calculations, and PDF export | [Visit](/functions/invoice_generator/) |
 
 ## License
 
