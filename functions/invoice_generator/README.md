@@ -24,6 +24,33 @@ Returns the complete invoice generator web application.
 
 **Response**: HTML page with the invoice generator form and preview.
 
+#### Preview-Only Mode
+
+For automated PDF generation with Puppeteer, you can use the preview-only mode:
+
+1. **Save invoice data** to localStorage with key `invoiceFormData`
+2. **Set preview flag** in localStorage: `localStorage.setItem("previewOnly", "true")`
+3. **Reload the page** to show only the invoice preview without form elements
+
+**Example JavaScript:**
+
+```javascript
+// Save your invoice data
+const invoiceData = {
+  yourName: "John Doe",
+  yourEmail: "john@example.com",
+  clientName: "Client Company",
+  // ... other invoice fields
+};
+localStorage.setItem("invoiceFormData", JSON.stringify(invoiceData));
+
+// Enable preview-only mode
+localStorage.setItem("previewOnly", "true");
+
+// Reload page to show clean invoice
+window.location.reload();
+```
+
 ---
 
 ### GET /ping
@@ -114,6 +141,178 @@ Generate and download a PDF version of the invoice.
 - **GET /index.css** - Application stylesheet
 - **GET /script.js** - Application JavaScript
 
+## 🤖 Puppeteer Integration
+
+The invoice generator is designed to work seamlessly with Puppeteer for automated PDF generation. The preview-only mode provides a clean invoice layout perfect for PDF capture.
+
+### Setup Puppeteer PDF Generation
+
+**1. Install Puppeteer**
+
+```bash
+npm install puppeteer
+# or
+yarn add puppeteer
+```
+
+**2. Basic PDF Generation Script**
+
+```javascript
+const puppeteer = require("puppeteer");
+
+async function generateInvoicePDF(invoiceData, outputPath) {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+
+  // Navigate to your invoice generator
+  await page.goto("https://your-function-url.appwrite.io/");
+
+  // Set invoice data and enable preview-only mode
+  await page.evaluate((data) => {
+    localStorage.setItem("invoiceFormData", JSON.stringify(data));
+    localStorage.setItem("previewOnly", "true");
+  }, invoiceData);
+
+  // Reload to show preview-only mode
+  await page.reload({ waitUntil: "networkidle0" });
+
+  // Generate PDF with optimized settings
+  await page.pdf({
+    path: outputPath,
+    format: "A4",
+    margin: {
+      top: "10mm",
+      right: "10mm",
+      bottom: "10mm",
+      left: "10mm",
+    },
+    printBackground: true,
+    preferCSSPageSize: true,
+  });
+
+  await browser.close();
+}
+
+// Usage example
+const invoiceData = {
+  yourName: "Bishwajeet Parhi",
+  yourEmail: "bishwajeet.techmaster@gmail.com",
+  yourPhone: "+1-555-0123",
+  yourWebsite: "https://bishwajeetparhi.dev",
+  taxId: "FSTPP6465C",
+  yourAddress:
+    "E-403 Monsoon Breeze\nSector 78 Gurugram\nHaryana 122004\nIndia",
+  clientName: "Forty-Three INC",
+  clientEmail: "client@fortythree.com",
+  clientAddress: "100 Harbor Dr\nSan Diego\nCA 92101\nUSA",
+  invoiceNumber: "INV-2025-001",
+  invoiceDate: "2025-06-30",
+  dueDate: "2025-07-30",
+  currency: "USD",
+  taxRate: "0",
+  discount: "0",
+  notes: "Bank Details:\nAccount: 1234567890\nRouting: 123456789",
+  services: [
+    {
+      description: "Consulting Services",
+      quantity: "1",
+      rate: "4400.00",
+    },
+  ],
+};
+
+generateInvoicePDF(invoiceData, "invoice.pdf");
+```
+
+**3. Advanced PDF Configuration**
+
+```javascript
+// For better print quality and layout
+const pdfOptions = {
+  format: "A4",
+  margin: {
+    top: "10mm",
+    right: "10mm",
+    bottom: "10mm",
+    left: "10mm",
+  },
+  printBackground: true,
+  preferCSSPageSize: true,
+  displayHeaderFooter: false,
+  scale: 1.0,
+  width: "210mm",
+  height: "297mm",
+};
+
+await page.pdf(pdfOptions);
+```
+
+### Docker Setup for Puppeteer
+
+**Dockerfile Example**
+
+```dockerfile
+FROM node:18-slim
+
+# Install Puppeteer dependencies
+RUN apt-get update && apt-get install -y \
+    chromium \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set Puppeteer to use installed Chromium
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+CMD ["node", "generate-pdf.js"]
+```
+
+### Batch PDF Generation
+
+**Generate Multiple Invoices**
+
+```javascript
+async function generateBatchPDFs(invoicesData) {
+  const browser = await puppeteer.launch();
+
+  for (const [index, invoiceData] of invoicesData.entries()) {
+    const page = await browser.newPage();
+
+    await page.goto("https://your-function-url.appwrite.io/");
+
+    await page.evaluate((data) => {
+      localStorage.setItem("invoiceFormData", JSON.stringify(data));
+      localStorage.setItem("previewOnly", "true");
+    }, invoiceData);
+
+    await page.reload({ waitUntil: "networkidle0" });
+
+    await page.pdf({
+      path: `invoice-${invoiceData.invoiceNumber}.pdf`,
+      format: "A4",
+      margin: { top: "10mm", right: "10mm", bottom: "10mm", left: "10mm" },
+      printBackground: true,
+    });
+
+    await page.close();
+  }
+
+  await browser.close();
+}
+```
+
+### Key Benefits
+
+- **Clean Layout**: Preview-only mode hides all form elements and navigation
+- **Print Optimized**: CSS designed specifically for PDF generation
+- **No Clipping**: Content flows properly across multiple pages if needed
+- **Consistent Styling**: Same layout as web preview
+- **A4 Optimized**: Perfect margins and formatting for standard paper size
+
 ## 💰 Supported Currencies
 
 | Currency          | Symbol | Code | Word Format   |
@@ -136,8 +335,35 @@ Generate and download a PDF version of the invoice.
 ### Data Persistence
 
 - **Save Form Data**: Store all form data in browser localStorage
-- **Load Saved Data**: Retrieve and populate previously saved form data
+- **Load Saved Data**: Retrieve and populate previously saved form data (no confirmation dialog)
 - **Timestamp Tracking**: Track when data was saved
+- **Preview-Only Mode**: Special mode for Puppeteer PDF generation that hides form elements
+
+### localStorage Keys
+
+| Key               | Purpose                                    | Type   |
+| ----------------- | ------------------------------------------ | ------ |
+| `invoiceFormData` | Stores complete form data                  | JSON   |
+| `previewOnly`     | Enables clean preview mode (set to "true") | String |
+
+**Utility Functions Available:**
+
+```javascript
+// Enable preview-only mode programmatically
+function enablePreviewOnlyMode(invoiceData) {
+  if (invoiceData) {
+    localStorage.setItem("invoiceFormData", JSON.stringify(invoiceData));
+  }
+  localStorage.setItem("previewOnly", "true");
+  window.location.reload();
+}
+
+// Disable preview-only mode
+function disablePreviewOnlyMode() {
+  localStorage.removeItem("previewOnly");
+  window.location.reload();
+}
+```
 
 ### Validation
 
@@ -159,9 +385,19 @@ Generate and download a PDF version of the invoice.
 ### Invoice Preview
 
 - **Professional Layout**: Clean, business-ready invoice design
-- **Print Optimized**: CSS print styles for PDF generation
+- **Print Optimized**: CSS print styles for PDF generation and browser printing
 - **Real-time Calculations**: Live updates of totals and taxes
 - **Amount in Words**: Written format of total amount
+- **No Clipping**: Content flows across multiple pages for long invoices
+- **Preview-Only Mode**: Clean mode for automated PDF generation (hides form elements)
+
+### Print Features
+
+- **A4 Optimized**: Perfect formatting for standard paper size
+- **Proper Margins**: 10mm margins for professional appearance
+- **Consultant Info Right-Aligned**: Professional header layout
+- **Page Breaks**: Smart page breaking for multi-page invoices
+- **Background Colors**: Preserved in print output
 
 ## ⚙️ Configuration
 
