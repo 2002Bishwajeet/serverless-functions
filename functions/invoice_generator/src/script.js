@@ -643,8 +643,21 @@ function downloadPDF() {
     previewInvoice();
   }
 
-  // Use the browser's print functionality to save as PDF
-  window.print();
+  // Add A4 page setup class to body for better print formatting
+  document.body.classList.add("print-mode");
+
+  // Ensure the invoice preview is properly visible for printing
+  const invoicePreview = document.getElementById("invoicePreview");
+  invoicePreview.style.display = "block";
+
+  // Small delay to ensure styles are applied
+  setTimeout(() => {
+    // Use the browser's print functionality to save as PDF
+    window.print();
+
+    // Remove print mode class after printing
+    document.body.classList.remove("print-mode");
+  }, 100);
 
   // If preview wasn't visible before, ask if user wants to keep it open
   if (!wasPreviewVisible) {

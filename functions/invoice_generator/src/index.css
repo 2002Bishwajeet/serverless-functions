@@ -532,10 +532,24 @@ input[readonly] {
 
 /* Print Styles */
 @media print {
+  /* Set A4 page format */
+  @page {
+    size: A4;
+    margin: 15mm 10mm;
+  }
+
+  * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
   body {
     background: white;
     margin: 0;
     padding: 0;
+    font-size: 11pt;
+    line-height: 1.3;
+    width: 100%;
   }
 
   /* Hide all non-invoice elements */
@@ -553,15 +567,20 @@ input[readonly] {
     border-radius: 0;
     margin: 0;
     padding: 0;
+    width: 100%;
+    height: auto;
   }
 
   .invoice-container {
-    padding: 20px;
-    max-width: none;
+    padding: 15mm 10mm;
+    max-width: 190mm;
     width: 100%;
-    margin: 0;
+    margin: 0 auto;
     box-shadow: none;
     border: none;
+    font-size: 11pt;
+    line-height: 1.3;
+    box-sizing: border-box;
   }
 
   /* Ensure proper page layout */
@@ -569,22 +588,137 @@ input[readonly] {
     max-width: none;
     margin: 0;
     padding: 0;
+    width: 100%;
   }
 
   /* Optimize invoice layout for print */
   .invoice-header {
-    margin-bottom: 30px;
+    margin-bottom: 15mm;
     page-break-inside: avoid;
+    padding-bottom: 10mm;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2pt solid #667eea !important;
+  }
+
+  .invoice-title h1 {
+    font-size: 28pt;
+    margin-bottom: 3pt;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+
+  .invoice-number {
+    font-size: 11pt;
+    color: #667eea;
+    font-weight: 600;
+  }
+
+  .consultant-info {
+    text-align: right;
+    max-width: 45%;
+  }
+
+  .consultant-info h3 {
+    font-size: 11pt;
+    margin-bottom: 2pt;
+    color: #2c3e50;
+    font-weight: 600;
+  }
+
+  .consultant-info p {
+    font-size: 9pt;
+    margin-bottom: 1pt;
+    color: #666;
+    line-height: 1.2;
   }
 
   .invoice-details {
-    margin-bottom: 30px;
+    margin-bottom: 15mm;
     page-break-inside: avoid;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .bill-to {
+    max-width: 50%;
+  }
+
+  .bill-to h4 {
+    font-size: 9pt;
+    margin-bottom: 5pt;
+    color: #667eea;
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+    font-weight: 600;
+  }
+
+  .bill-to h3 {
+    font-size: 12pt;
+    margin-bottom: 2pt;
+    color: #2c3e50;
+    font-weight: 600;
+  }
+
+  .bill-to p {
+    font-size: 9pt;
+    margin-bottom: 1pt;
+    color: #666;
+    line-height: 1.2;
+  }
+
+  .invoice-meta {
+    text-align: right;
+    max-width: 45%;
+  }
+
+  .meta-item {
+    margin-bottom: 3pt;
+    font-size: 9pt;
+    line-height: 1.2;
+  }
+
+  .meta-item .label {
+    font-weight: 600;
+    color: #555;
   }
 
   .services-table {
     page-break-inside: auto;
-    margin-bottom: 30px;
+    margin-bottom: 10mm;
+    font-size: 9pt;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+
+  .services-table th {
+    font-size: 8pt;
+    padding: 6pt 8pt;
+    background-color: #667eea !important;
+    color: white !important;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.3pt;
+    text-align: left;
+  }
+
+  .services-table th:last-child {
+    text-align: right;
+  }
+
+  .services-table td {
+    font-size: 9pt;
+    padding: 6pt 8pt;
+    border-bottom: 1pt solid #e1e5e9;
+    line-height: 1.2;
+  }
+
+  .services-table td:last-child {
+    text-align: right;
+    font-weight: 600;
   }
 
   .services-table thead {
@@ -595,37 +729,128 @@ input[readonly] {
     page-break-inside: avoid;
   }
 
+  .services-table tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+
   .invoice-totals {
     page-break-inside: avoid;
-    margin-bottom: 20px;
+    margin-bottom: 10mm;
+    width: 60mm;
+    margin-left: auto;
+    clear: both;
+  }
+
+  .totals-row {
+    padding: 3pt 0;
+    font-size: 9pt;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.5pt solid #e1e5e9;
+  }
+
+  .totals-row.total {
+    font-size: 11pt;
+    padding: 8pt 0;
+    margin-top: 5pt;
+    font-weight: 700;
+    color: #2c3e50;
+    border-top: 1.5pt solid #667eea !important;
+    border-bottom: 1.5pt solid #667eea !important;
+  }
+
+  .total-in-words {
+    font-size: 8pt;
+    margin-top: 8pt;
+    padding: 6pt;
+    background-color: #f8f9fa;
+    border-radius: 3pt;
+    border-left: 2pt solid #667eea;
+    page-break-inside: avoid;
+  }
+
+  .words-label {
+    font-size: 7pt;
+    margin-bottom: 2pt;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.3pt;
+  }
+
+  #totalInWords {
+    font-size: 8pt;
+    font-style: italic;
+    color: #2c3e50;
+    font-weight: 500;
+    text-transform: capitalize;
+    line-height: 1.2;
   }
 
   .invoice-notes {
     page-break-inside: avoid;
+    margin-top: 15mm;
+    padding: 10pt;
+    background-color: #f8f9fa;
+    border-radius: 4pt;
+    border-left: 2pt solid #667eea;
   }
 
-  /* Ensure proper font sizes for print */
-  .invoice-container {
-    font-size: 12pt;
-    line-height: 1.4;
+  .invoice-notes h4 {
+    font-size: 10pt;
+    margin-bottom: 5pt;
+    color: #2c3e50;
+    font-weight: 600;
   }
 
-  .invoice-title h1 {
-    font-size: 24pt;
+  .invoice-notes p {
+    font-size: 8pt;
+    line-height: 1.3;
+    color: #666;
   }
 
-  .consultant-info h3,
-  .bill-to h3 {
-    font-size: 14pt;
+  /* Remove unnecessary spacing and elements */
+  .invoice-header {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
-  .services-table th,
-  .services-table td {
+  .invoice-details {
+    display: flex !important;
+    justify-content: space-between;
+  }
+
+  /* Hide any unnecessary elements that might appear */
+  button,
+  .btn,
+  .preview-actions {
+    display: none !important;
+  }
+
+  /* Ensure proper line heights for readability */
+  p,
+  td,
+  th {
+    line-height: 1.2;
+  }
+
+  /* Force exact dimensions for print mode */
+  .print-mode .invoice-preview {
+    width: 210mm !important;
+    min-height: 297mm !important;
+    margin: 0 auto !important;
+    background: white !important;
+    box-sizing: border-box;
+  }
+
+  .print-mode .invoice-container {
+    max-width: 190mm !important;
+    margin: 0 auto !important;
+    padding: 15mm 10mm !important;
+    box-sizing: border-box;
     font-size: 11pt;
-  }
-
-  .total-in-words {
-    font-size: 11pt;
+    line-height: 1.3;
   }
 }
 
