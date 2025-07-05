@@ -131,6 +131,23 @@ function loadFormDataSilently(formData) {
   document.getElementById("discount").value = formData.discount || "0";
   document.getElementById("notes").value = formData.notes || "";
 
+  // use default values for invoice number and dates if not provided
+  if (!formData.invoiceNumber) {
+    const invoiceNumber = "INV-" + Date.now().toString().slice(-6);
+    document.getElementById("invoiceNumber").value = invoiceNumber;
+  }
+  if (!formData.invoiceDate) {
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("invoiceDate").value = today;
+  }
+  if (!formData.dueDate) {
+    const dueDate = new Date();
+    dueDate.setDate(dueDate.getDate() + 30);
+    document.getElementById("dueDate").value = dueDate
+      .toISOString()
+      .split("T")[0];
+  }
+
   // Load services data
   if (formData.services && formData.services.length > 0) {
     loadServicesData(formData.services);
