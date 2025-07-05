@@ -59,9 +59,86 @@ const thousands = ["", "thousand", "million", "billion", "trillion"];
 
 // Initialize the application
 document.addEventListener("DOMContentLoaded", function () {
-  initializeInvoice();
-  setupEventListeners();
+  // Check for preview-only mode
+  const previewOnly = localStorage.getItem("previewOnly") === "true";
+  const savedData = localStorage.getItem("invoiceFormData");
+
+  if (previewOnly && savedData) {
+    // Load data and show invoice in preview-only mode
+    initializePreviewOnlyMode();
+  } else {
+    // Normal initialization
+    initializeInvoice();
+    setupEventListeners();
+  }
 });
+
+function initializePreviewOnlyMode() {
+  try {
+    const formData = JSON.parse(localStorage.getItem("invoiceFormData"));
+
+    // Load the form data first (silently)
+    loadFormDataSilently(formData);
+
+    // Hide all non-invoice elements
+    const elementsToHide = [
+      ".header",
+      ".form-section",
+      ".preview-actions",
+      ".footer",
+    ];
+
+    elementsToHide.forEach((selector) => {
+      const element = document.querySelector(selector);
+      if (element) {
+        element.style.display = "none";
+      }
+    });
+
+    // Show only the invoice preview using existing functionality
+    document.getElementById("invoicePreview").style.display = "block";
+
+    // Use existing preview population function
+    populatePreview();
+    updateTotals();
+
+    // Set page title for PDF
+    document.title = `Invoice ${formData.invoiceNumber || "Preview"}`;
+  } catch (error) {
+    console.error("Error loading preview-only mode:", error);
+    // Fallback to normal mode
+    initializeInvoice();
+    setupEventListeners();
+  }
+}
+
+function loadFormDataSilently(formData) {
+  // Fill in the form fields without showing success message
+  document.getElementById("yourName").value = formData.yourName || "";
+  document.getElementById("yourEmail").value = formData.yourEmail || "";
+  document.getElementById("yourPhone").value = formData.yourPhone || "";
+  document.getElementById("yourWebsite").value = formData.yourWebsite || "";
+  document.getElementById("taxId").value = formData.taxId || "";
+  document.getElementById("yourAddress").value = formData.yourAddress || "";
+  document.getElementById("clientName").value = formData.clientName || "";
+  document.getElementById("clientEmail").value = formData.clientEmail || "";
+  document.getElementById("clientAddress").value = formData.clientAddress || "";
+  document.getElementById("invoiceNumber").value = formData.invoiceNumber || "";
+  document.getElementById("invoiceDate").value = formData.invoiceDate || "";
+  document.getElementById("dueDate").value = formData.dueDate || "";
+  document.getElementById("currency").value = formData.currency || "USD";
+  document.getElementById("taxRate").value = formData.taxRate || "0";
+  document.getElementById("discount").value = formData.discount || "0";
+  document.getElementById("notes").value = formData.notes || "";
+
+  // Load services data
+  if (formData.services && formData.services.length > 0) {
+    loadServicesData(formData.services);
+  }
+
+  // Update currency symbols
+  updateCurrencySymbols();
+}
 
 function initializeInvoice() {
   // Set default values
@@ -567,7 +644,6 @@ function downloadPDF() {
   }
 
   // Use the browser's print functionality to save as PDF
-  // This is the most reliable cross-browser method
   window.print();
 
   // If preview wasn't visible before, ask if user wants to keep it open
@@ -578,7 +654,7 @@ function downloadPDF() {
       } else {
         editInvoice();
       }
-    }, 1000);
+    }, 2000);
   }
 }
 
@@ -683,15 +759,6 @@ function loadFormData() {
 
     const formData = JSON.parse(savedData);
 
-    // Confirm before loading
-    if (
-      !confirm(
-        `Load saved data from ${new Date(formData.savedAt).toLocaleString()}?`
-      )
-    ) {
-      return;
-    }
-
     // Fill in the form fields
     document.getElementById("yourName").value = formData.yourName || "";
     document.getElementById("yourEmail").value = formData.yourEmail || "";
@@ -735,6 +802,23 @@ function loadFormData() {
     alert("Failed to load form data. The saved data might be corrupted.");
     console.error("Load error:", error);
   }
+}
+
+// Utility function to enable preview-only mode (can be called externally)
+function enablePreviewOnlyMode(invoiceData) {
+  if (invoiceData) {
+    localStorage.setItem("invoiceFormData", JSON.stringify(invoiceData));
+  }
+  localStorage.setItem("previewOnly", "true");
+
+  // Reload the page to apply preview-only mode
+  window.location.reload();
+}
+
+// Utility function to disable preview-only mode
+function disablePreviewOnlyMode() {
+  localStorage.removeItem("previewOnly");
+  window.location.reload();
 }
 
 // Helper function to get services data
