@@ -195,28 +195,33 @@ async function generateInvoicePDF(invoiceData, outputPath) {
 
 // Usage example
 const invoiceData = {
-  yourName: "Bishwajeet Parhi",
-  yourEmail: "bishwajeet.techmaster@gmail.com",
+  yourName: "John Smith",
+  yourEmail: "john.smith@freelancer.com",
   yourPhone: "+1-555-0123",
-  yourWebsite: "https://bishwajeetparhi.dev",
-  taxId: "FSTPP6465C",
-  yourAddress:
-    "E-403 Monsoon Breeze\nSector 78 Gurugram\nHaryana 122004\nIndia",
-  clientName: "Forty-Three INC",
-  clientEmail: "client@fortythree.com",
-  clientAddress: "100 Harbor Dr\nSan Diego\nCA 92101\nUSA",
+  yourWebsite: "https://johnsmith.dev",
+  taxId: "TAX123456",
+  yourAddress: "123 Business St\nSuite 100\nNew York, NY 10001\nUSA",
+  clientName: "Acme Corporation",
+  clientEmail: "billing@acme.com",
+  clientAddress: "456 Client Ave\nClient City\nCA 90210\nUSA",
   invoiceNumber: "INV-2025-001",
   invoiceDate: "2025-06-30",
   dueDate: "2025-07-30",
   currency: "USD",
-  taxRate: "0",
+  taxRate: "8.25",
   discount: "0",
-  notes: "Bank Details:\nAccount: 1234567890\nRouting: 123456789",
+  notes:
+    "Payment Terms: Net 30\nBank Details: Wire transfer available upon request",
   services: [
     {
-      description: "Consulting Services",
-      quantity: "1",
-      rate: "4400.00",
+      description: "Web Development Services",
+      quantity: "40",
+      rate: "125.00",
+    },
+    {
+      description: "UI/UX Design",
+      quantity: "20",
+      rate: "150.00",
     },
   ],
 };
